@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Baby Raïssa ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Gaegu:wght@400;700&display=swap');
+
+        body {
+            background-color: #fff2e6;
+            background-image: radial-gradient(#ffb3c1 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'Fredoka One', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #ff4d8d;
+        }
+
+        .container { text-align: center; max-width: 800px; width: 100%; }
+        h1 { font-size: clamp(2rem, 8vw, 3.5rem); text-shadow: 2px 2px #fff; }
+        
+        .btn-box { display: flex; gap: 20px; align-items: center; justify-content: center; min-height: 200px; margin-bottom: 20px; }
+        button {
+            padding: 15px 45px;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            font-family: 'Fredoka One', cursive;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #noBtn { background-color: #f1f1f1; color: #888; }
+        #yesBtn { background-color: #ff4d8d; color: white; position: relative; }
+
+        #success-page { display: none; flex-direction: column; align-items: center; width: 100%; }
+
+        .envelope {
+            width: 120px; height: 80px;
+            background-color: #ffb3c1;
+            position: relative; cursor: pointer;
+            border-radius: 0 0 5px 5px;
+            margin: 20px auto;
+        }
+        .envelope::after {
+            content: ""; position: absolute; top: 0; left: 0;
+            border-left: 60px solid transparent; border-right: 60px solid transparent;
+            border-top: 50px solid #ff4d8d;
+        }
+        .letter-box {
+            display: none; background: white; padding: 30px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 77, 141, 0.15);
+            font-family: 'Gaegu', cursive; font-size: 1.4rem; color: #444;
+            text-align: left; border: 2px dashed #ffb3c1; margin-bottom: 40px;
+        }
+
+        .moments-title { font-size: 2.5rem; margin-top: 50px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-top: 20px;
+        }
+        .photo-card {
+            background: white; padding: 10px; border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer;
+            min-height: 350px; display: flex; flex-direction: column;
+        }
+        .placeholder {
+            flex-grow: 1; background: #ffe4e9; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 3rem;
+        }
+        .actual-img { 
+            display: none; width: 100%; height: 300px; 
+            object-fit: cover; border-radius: 10px; 
+        }
+        .caption { font-size: 1.2rem; margin-top: 10px; color: #ff4d8d; font-family: 'Gaegu', cursive; font-weight: bold; }
+
+        #guilt-msg { height: 40px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div id="question-page" class="container">
+        <h1>Baby Raïssa, <br> will you be my valentine?</h1>
+        <div id="guilt-msg"></div>
+        <div class="btn-box">
+            <button id="noBtn">NO</button>
+            <button id="yesBtn">YES</button>
+        </div>
+    </div>
+
+    <div id="success-page" class="container">
+        <h1>thank you for being my valentine, i love u so much ❤️</h1>
+        
+        <div class="envelope" id="envelope"></div>
+        <p>Click the envelope to read your letter 📩</p>
+
+        <div class="letter-box" id="letter">
+            <strong>My Love Raïssa,</strong><br><br>
+            I wanna tell you how much I really appreciate and admire the way you carry yourself, the warmth you bring in my life without even trying and mostly the way your smile stays with me longer than it should. <br><br>
+            Baby you brought something in my life that I didn’t know I was missing. Be my valentine for now and forever, I love you ❤️<br><br>
+            <strong>Forever yours, Charlie</strong>
+        </div>
+
+        <h2 class="moments-title">Our Special Moments 📸</h2>
+        <p>Click on each photo to reveal our memories together!</p>
+        
+        <div class="grid">
+            <div class="photo-card" onclick="reveal(this)">
+                <div class="placeholder">✨</div>
+                <img class="actual-img" src="princess.png">
+                <div class="caption">a pretty princess with pretty flowers</div>
+            </div>
+
+            <div class="photo-card" onclick="reveal(this)">
+                <div class="placeholder">💞</div>
+                <img class="actual-img" src="first_date.png">
+                <div class="caption">our first date💞</div>
+            </div>
+
+            <div class="photo-card" onclick="reveal(this)">
+                <div class="placeholder">🌟</div>
+                <img class="actual-img" src="heart.png">
+                <div class="caption">❤️</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const guiltMsg = document.getElementById('guilt-msg');
+        
+        let yesScale = 1;
+        let index = 0;
+        const messages = ["are you sure?😏", "you hate me and want me to die?😩", "Say yes please?🙂", "Clicked No? Wow!!!! 😩", "baby pleaseee? 🤗"];
+
+        noBtn.addEventListener('click', () => {
+            yesScale += 0.5;
+            yesBtn.style.transform = `scale(${yesScale})`;
+            if (index < messages.length) {
+                guiltMsg.innerText = messages[index];
+                index++;
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.getElementById('question-page').style.display = 'none';
+            document.getElementById('success-page').style.display = 'flex';
+        });
+
+        document.getElementById('envelope').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('letter').style.display = 'block';
+        });
+
+        function reveal(card) {
+            const img = card.querySelector('.actual-img');
+            const placeholder = card.querySelector('.placeholder');
+            placeholder.style.display = 'none';
+            img.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
