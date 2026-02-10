@@ -5,159 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Baby Raïssa ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Gaegu:wght@400;700&display=swap');
 
         body {
-            background-color: #fff2e6; /* Pale cream/pink background */
+            background-color: #fff2e6;
             background-image: radial-gradient(#ffb3c1 0.5px, transparent 0.5px);
-            background-size: 20px 20px; /* Subtle heart/dot aesthetic */
+            background-size: 20px 20px;
             font-family: 'Fredoka One', cursive;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-            max-width: 600px;
-            position: relative;
-        }
-
-        h1 {
+            overflow-x: hidden;
             color: #ff4d8d;
-            font-size: 4rem;
-            margin-bottom: 30px;
-            line-height: 1.2;
-            text-shadow: 2px 2px #fff;
         }
 
-        .main-ui {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
+        .container { text-align: center; max-width: 600px; padding: 20px; }
 
-        /* Left side messages */
-        #message-list {
-            text-align: left;
-            color: #d63384;
-            font-size: 1.2rem;
-            min-width: 200px;
-        }
+        h1 { font-size: clamp(2rem, 8vw, 3.5rem); text-shadow: 2px 2px #fff; margin-bottom: 10px; }
+        p { font-size: 1.1rem; margin-bottom: 30px; }
 
-        .guilt-text {
-            margin: 5px 0;
-            animation: fadeIn 0.5s ease;
-        }
-
-        /* Button Styling */
-        .btn-box {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
+        /* Buttons */
+        .btn-box { display: flex; gap: 20px; align-items: center; justify-content: center; min-height: 150px; }
         button {
-            padding: 20px 50px;
-            font-size: 1.5rem;
+            padding: 15px 45px;
+            font-size: 1.4rem;
             border: none;
-            border-radius: 100px; /* Pill shape */
+            border-radius: 100px;
             cursor: pointer;
             font-family: 'Fredoka One', cursive;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 15px rgba(255, 77, 141, 0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        #noBtn { background-color: #f1f1f1; color: #888; }
+        #yesBtn { background-color: #ff4d8d; color: white; position: relative; }
 
-        #noBtn { background-color: #ff85a2; color: white; }
-        #yesBtn { background-color: #ff4d8d; color: white; }
-
-        #yesBtn:hover { transform: scale(1.1); background-color: #ff1f6d; }
-
-        /* Success Screen */
-        #success {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff2e6;
-            z-index: 100;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .final-text {
-            color: #ff4d8d;
-            font-size: 3.5rem;
+        /* Post-Yes Section */
+        #success { display: none; flex-direction: column; align-items: center; animation: fadeIn 0.8s ease; }
+        
+        .envelope-container {
+            background: rgba(255, 255, 255, 0.5);
             padding: 40px;
+            border-radius: 20px;
+            margin: 20px 0;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .envelope {
+            width: 120px;
+            height: 80px;
+            background-color: #ffb3c1;
+            position: relative;
+            cursor: pointer;
+            border-radius: 0 0 5px 5px;
+            margin: 0 auto 20px;
+        }
+        .envelope::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-top: 50px solid #ff4d8d;
+        }
+
+        .letter-box {
+            display: none;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 77, 141, 0.15);
+            font-family: 'Gaegu', cursive;
+            font-size: 1.4rem;
+            color: #444;
+            line-height: 1.5;
+            text-align: left;
+            border: 2px dashed #ffb3c1;
+            animation: slideUp 0.6s ease;
+        }
+
+        #guilt-msg { height: 30px; font-size: 1rem; font-style: italic; margin-bottom: 10px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div id="content" class="container">
-        <h1>Baby Raïssa <br> will you be my Valentine?</h1>
+        <h1>Will You Be My Valentine? 💕</h1>
+        <p>Hey baby! I have something important to ask you...</p>
         
-        <div class="main-ui">
-            <div id="message-list">
-                </div>
+        <div id="guilt-msg"></div>
 
-            <div class="btn-box">
-                <button id="noBtn">NO</button>
-                <button id="yesBtn">YES</button>
-            </div>
+        <div class="btn-box">
+            <button id="noBtn">No 🥺</button>
+            <button id="yesBtn">YES! 💖</button>
         </div>
     </div>
 
-    <div id="success">
-        <h1 class="final-text">thank you for being my valentine, i love u so much ❤️</h1>
-        <div style="font-size: 5rem;">✨🥰🌸</div>
+    <div id="success" class="container">
+        <h1>Yaaay! You said YES! 🥳</h1>
+        <p>Because you're so sweet, I've prepared something! ✨</p>
+        
+        <div class="envelope-container">
+            <div class="envelope" id="envelope"></div>
+            <p style="font-size: 0.9rem;">📍 Click the envelope to read your letter</p>
+            
+            <div class="letter-box" id="letter">
+                <strong>My Love Raïssa,</strong><br><br>
+                I wanna tell you how much I really appreciate and admire the way you carry yourself, the warmth you bring in my life without even trying and mostly the way your smile stays with me longer than it should.<br><br>
+                Baby you brought something in my life that I didn’t know I was missing. Be my valentine for now and forever, I love you ❤️<br><br>
+                <strong>Forever yours, Charlie</strong>
+            </div>
+        </div>
     </div>
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const messageList = document.getElementById('message-list');
+        const guiltMsg = document.getElementById('guilt-msg');
         const content = document.getElementById('content');
         const success = document.getElementById('success');
+        const envelope = document.getElementById('envelope');
+        const letter = document.getElementById('letter');
 
         let yesScale = 1;
-        let messageIndex = 0;
-
-        const guiltMessages = [
-            "are you sure?😏",
-            "you hate me and want me to die?😩",
-            "Say yes please?🙂",
+        let index = 0;
+        const messages = [
+            "Are you sure? 😏",
+            "You hate me and want me to die? 😩",
+            "Say yes please? 🙂",
             "Clicked No? Wow!!!! 😩",
-            "baby pleaseee? 🤗"
+            "Baby pleaseee? 🤗"
         ];
 
         noBtn.addEventListener('click', () => {
-            // 1. Grow the YES button
             yesScale += 0.4;
             yesBtn.style.transform = `scale(${yesScale})`;
-            
-            // 2. Add message to the list on the left
-            if (messageIndex < guiltMessages.length) {
-                const newMsg = document.createElement('p');
-                newMsg.className = 'guilt-text';
-                newMsg.innerText = guiltMessages[messageIndex];
-                messageList.appendChild(newMsg);
-                messageIndex++;
+            if (index < messages.length) {
+                guiltMsg.innerText = messages[index];
+                index++;
             }
-            
-            // 3. Make the "NO" button slightly harder to click (optional shift)
-            noBtn.style.transform = `scale(${1 - (messageIndex * 0.05)})`;
         });
 
         yesBtn.addEventListener('click', () => {
             content.style.display = 'none';
             success.style.display = 'flex';
+        });
+
+        envelope.addEventListener('click', () => {
+            envelope.style.display = 'none';
+            letter.style.display = 'block';
         });
     </script>
 </body>
